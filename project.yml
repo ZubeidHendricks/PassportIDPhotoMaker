@@ -41,3 +41,26 @@ targets:
         SWIFT_VERSION: "5.0"
         GENERATE_INFOPLIST_FILE: NO
         CODE_SIGN_STYLE: Automatic
+
+  PassportIDPhotoMakerTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Tests
+      - path: Sources/IDPhotoService.swift
+    settings:
+      base:
+        PRODUCT_NAME: PassportIDPhotoMakerTests
+        PRODUCT_BUNDLE_IDENTIFIER: com.zubeid.passportidphotomaker.tests
+        GENERATE_INFOPLIST_FILE: YES
+        TARGETED_DEVICE_FAMILY: "1"
+        SWIFT_VERSION: "5.0"
+
+schemes:
+  Tests:
+    build:
+      targets:
+        PassportIDPhotoMakerTests: [test]
+    test:
+      targets:
+        - PassportIDPhotoMakerTests

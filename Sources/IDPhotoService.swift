@@ -41,7 +41,9 @@ struct IDPhotoService {
         // White background composite via subject mask.
         let request = VNGenerateForegroundInstanceMaskRequest()
         let handler = VNImageRequestHandler(cgImage: cg, options: [:])
-        try handler.perform([request])
+        // Foreground masking needs the Neural Engine (unavailable on Simulator);
+        // if it fails, keep the original photo on the (already light) background.
+        try? handler.perform([request])
         var composited = input
         if let result = request.results?.first,
            let buffer = try? result.generateScaledMaskForImage(forInstances: result.allInstances, from: handler) {
